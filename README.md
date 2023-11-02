@@ -42,3 +42,4 @@ Next 13
 Typescript
 Clerk Auth
 shadcn ui
+PlanetScale & Prisma (mysql)
