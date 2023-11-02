@@ -43,3 +43,4 @@ Typescript
 Clerk Auth
 shadcn ui
 PlanetScale & Prisma (mysql)
+cloudinary (ai image generator)
