@@ -46,9 +46,7 @@ const ChatIdPage = async ({
         return redirect("/");
     }
     return ( 
-        <div>
             <ChatClient companion={companion} />
-        </div>
      );
 }
  

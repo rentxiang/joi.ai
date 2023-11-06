@@ -44,3 +44,7 @@ Clerk Auth
 shadcn ui
 PlanetScale & Prisma (mysql)
 cloudinary (ai image generator)
+Memory Services:
+pinecone
+stash
+langchain
