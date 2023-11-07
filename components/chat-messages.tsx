@@ -33,6 +33,7 @@ const ChatMessages = ({
     useEffect(() => {
         scrollRef?.current?.scrollIntoView({ behavior: "smooth"})
     },[messages.length]);
+    const connection = messages[-1] === undefined ?  <p className="rounded-md px-4 py-2 max-w-sm text-sm bg-primary/10"> - It seems we have lost our connection to our mothership 😢    </p> : ""
 
     return ( 
         <div className="flex-1 overflow-y-auto pr-4">
@@ -57,6 +58,7 @@ const ChatMessages = ({
                 isLoading
                 />
             )}
+            {connection}
             <div ref={scrollRef}/>
         </div>
      );

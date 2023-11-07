@@ -49,8 +49,7 @@ const ChatMessage = ({
                     ?   
                     <BeatLoader 
                     color={theme ===  "light" ? "black" : "white"}
-                    size={5}
-                />
+                    size={5}/>
                     : content
                 }
 
@@ -59,15 +58,16 @@ const ChatMessage = ({
             {role !== "user" && !isLoading && (
                 <Button
                     onClick={onCopy}
-                    className="opacity-0 group-hover:opacity-100 transition"
+                    className="opacity- group-hover:opacity-100 transition"
                     size="icon"
                     variant="ghost"
                 >
-                    <Copy className="w-4 h-4"/>
+                    <Copy className="w-3 h-3"/>
                 </Button>
             )}
         </div>
      );
+     
 }
  
 export default ChatMessage;
