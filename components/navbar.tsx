@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { Poppins } from "next/font/google";
 import { Sparkles } from "lucide-react";
 
@@ -20,6 +20,7 @@ export const Navbar = ({
   isPro
 }: NavbarProps) => {
   const proModal = useProModal();
+  const { userId } = useAuth();
 
   return ( 
     <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 h-16 border-b border-primary/10 bg-secondary">
@@ -32,10 +33,15 @@ export const Navbar = ({
         </Link>
       </div>
       <div className="flex items-center gap-x-3">
-        {!isPro && (
+        {!isPro && userId && (
           <Button onClick={proModal.onOpen} size="sm" variant="premium">
             Upgrade
             <Sparkles className="h-4 w-4 fill-white text-white ml-2" />
+          </Button>
+        )}
+          {!userId && (
+          <Button size="sm" variant="premium" >
+            <a href="/sign-in">Sign in</a>
           </Button>
         )}
         <ModeToggle />
