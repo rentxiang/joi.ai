@@ -46,5 +46,5 @@ PlanetScale & Prisma (mysql)
 cloudinary (ai image generator)
 Memory Services:
 pinecone
-stash
+upstash
 langchain

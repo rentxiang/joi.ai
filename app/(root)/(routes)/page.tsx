@@ -3,6 +3,7 @@ import { Categories } from "@/components/categories";
 import { Companions } from "@/components/companions";
 import { SearchInput } from "@/components/search-input";
 import LandingPage from "@/components/landing-page";
+import Footer from "@/components/footer";
 
 interface RootPageProps {
   searchParams: {
@@ -39,9 +40,14 @@ const RootPage = async ({ searchParams }: RootPageProps) => {
       <div id="explore">
         <SearchInput />
       </div>
+      <div className="mb-auto">
+        <Categories data={categories} />
+        <Companions data={data} />
+      </div>
 
-      <Categories data={categories} />
-      <Companions data={data} />
+      <div className="sticky top-[100vh]">
+        <Footer />
+      </div>
     </div>
   );
 };
