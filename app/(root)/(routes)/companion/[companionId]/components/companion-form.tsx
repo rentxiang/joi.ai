@@ -87,11 +87,11 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
         }
 
         toast({
-          description: "Success!"
+          description: "Successfully created."
         });
 
         router.refresh();
-        router.push("/");
+        router.push("/home");
 
       } catch (error) {
         toast({
