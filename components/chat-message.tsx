@@ -37,7 +37,6 @@ const ChatMessage = ({
             description: "Message copied to clipboard"
         })
     }
-
     return ( 
         <div className={cn( 
             "group flex items-start gap-x-3 py-4 w-full", 

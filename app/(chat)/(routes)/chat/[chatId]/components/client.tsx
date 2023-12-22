@@ -8,6 +8,8 @@ import { FormEvent, useState } from "react";
 import ChatForm from "@/components/chat-form";
 import ChatMessages from "@/components/chat-messages";
 import { ChatMessageProps } from "@/components/chat-message";
+import { FreeCounter } from "@/components/free-counter";
+
 
 interface ChatClientProps {
   companion: Companion & {
@@ -15,10 +17,12 @@ interface ChatClientProps {
     _count: {
       messages: number;
     };
-  };
+  },
+  apiLimitCount: number,
+  isPro: boolean
 }
 
-const ChatClient = ({ companion }: ChatClientProps) => {
+const ChatClient = ({ companion, apiLimitCount, isPro }: ChatClientProps) => {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatMessageProps[]>(companion.messages);
 
@@ -62,6 +66,7 @@ const ChatClient = ({ companion }: ChatClientProps) => {
         handleInputChange={handleInputChange}
         onSubmit={onSubmit}
       />
+      <FreeCounter isPro={isPro} apiLimitCount={apiLimitCount}/>
     </div>
   );
 };

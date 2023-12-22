@@ -2,7 +2,8 @@ import prismadb from "@/lib/prismadb";
 import { auth, redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import ChatClient from "./components/client";
-
+import { getApiLimitCount } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 interface ChatIdPageProps {
     params: {
@@ -15,7 +16,8 @@ interface ChatIdPageProps {
 const ChatIdPage = async ({
     params
 }:ChatIdPageProps) => {
-
+    const apiLimitCount = await getApiLimitCount();
+    const isPro = await checkSubscription();
     const {userId} = auth();
     if(!userId){
         return redirectToSignIn();
@@ -43,10 +45,10 @@ const ChatIdPage = async ({
 
 
     if (!companion) {
-        return redirect("/");
+        return redirect("/home");
     }
     return ( 
-            <ChatClient companion={companion} />
+            <ChatClient companion={companion} apiLimitCount={apiLimitCount} isPro={isPro}/>
      );
 }
  
