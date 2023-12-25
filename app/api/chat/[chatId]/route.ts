@@ -8,6 +8,8 @@ import { NextResponse } from "next/server";
 import { MemoryManager } from "@/lib/memory";
 import { rateLimit } from "@/lib/rate-limit";
 import prismadb from "@/lib/prismadb";
+import { checkApiLimit, increasedApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 dotenv.config({ path: `.env` });
 
@@ -18,9 +20,16 @@ export async function POST(
   try {
     const { prompt } = await request.json();
     const user = await currentUser();
+    const isPro = await checkSubscription();
 
     if (!user || !user.firstName || !user.id) {
       return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const freeTrial = await checkApiLimit();
+    
+    if(!freeTrial && !isPro){
+      return new NextResponse("Free trial has expired", { status: 403})
     }
 
     const identifier = request.url + "-" + user.id;
@@ -123,6 +132,7 @@ export async function POST(
     let s = new Readable();
     s.push(response);
     s.push(null);
+
     if (response !== undefined && response.length > 1) {
       memoryManager.writeToHistory("" + response.trim(), companionKey);
 
@@ -141,6 +151,7 @@ export async function POST(
         }
       });
     }
+    await increasedApiLimit();
 
     return new StreamingTextResponse(s);
   } catch (error) {

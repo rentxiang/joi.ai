@@ -64,3 +64,12 @@ model UserSubscription {
   stripePriceId         String? @unique @map(name: "stripe_price_id")
   stripeCurrentPeriodEnd DateTime? @unique @map(name: "stripe_current_period_end")
 }
+
+model UserApiLimit {
+  id String @id @default(uuid())
+  userId String @unique
+  count Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+}
